@@ -21,6 +21,15 @@ pipeline{
             }
         }
 
-        // Add the "Deploy" stage here
+        agent any
+        stage('Deploy') {
+            steps {
+                sh '''
+                    oc project cgjcck-deploy-strategies
+                    oc start-build greeting-service --follow --wait
+                '''
+            }
+        }
+    
     }
 }
